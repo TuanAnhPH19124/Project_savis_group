@@ -1,0 +1,30 @@
+<section>
+  <img class="listing-photo" [src]="imageSrc" alt=""/>
+</section>
+
+<section class="listing-apply">
+  <h2 class="section-heading">Insert</h2>
+  <form [formGroup]="addDataForm" (ngSubmit)="onSubmit()">
+    <input type="file" name="image" (change)="onFileChange($event)" />
+    <label for="name">Name:</label>
+    <input type="text" id="name" formControlName="name">
+  
+    <label for="city">City:</label>
+    <input type="text" id="city" formControlName="city">
+  
+    <label for="state">State:</label>
+    <input type="text" id="state" formControlName="state">
+  
+    <label for="availableUnits">Available Units:</label>
+    <input type="number" id="availableUnits" formControlName="availableUnits">
+  
+    <label for="wifi">Wi-Fi:</label>
+    <input type="checkbox" id="wifi" formControlName="wifi">
+  
+    <label for="laundry">Laundry:</label>
+    <input type="checkbox" id="laundry" formControlName="laundry">
+  
+    <button type="submit" [disabled]="!addDataForm.valid">Submit</button>
+  </form>
+</section>
+

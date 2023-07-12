@@ -1,0 +1,26 @@
+<mat-card class="m-2">
+  <div class="row" style="padding: 0; margin: 0;">
+    <div class="col-lg-6 p-0" style="display: flex; align-items: center;">
+        <mat-checkbox class="example-margin" color="primary" (change)="setSelectedBooking()" [checked]="bookingDetail?.selected"></mat-checkbox>
+        <img class="me-2" mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <div style="padding: 0; margin: 0;">
+          <mat-card-title>{{bookingDetail?.name}}</mat-card-title>
+          <mat-card-subtitle class="listing-location">{{bookingDetail?.location}}</mat-card-subtitle>
+        </div>
+    </div>
+    <div class="col-lg-1" style="display: flex; justify-content: center; align-items: center;">
+      <mat-card-title>đ{{price}}</mat-card-title>
+    </div>
+    <div class="col-lg-4" style="display: flex; justify-content: center; align-items: center;">
+      <button (click)="plus()" mat-flat-button style="padding: 0;"><mat-icon style="margin: 0;">arrow_upward</mat-icon></button>
+      <input type="text" class="inputAmount" readonly [value]="bookingDetail?.amount" #amout>
+      <button (click)="devide()" mat-flat-button style="padding: 0;"><mat-icon style="margin: 0;">arrow_downward</mat-icon></button>
+    </div>
+    <div class="col-lg-1" style="display: flex; align-items: center; justify-content: end;">
+      <button mat-fab (click)="openDialog('0ms', '0ms')" style="width: 45px; height: 45px;" color="primary" aria-label="Example icon button with a delete icon">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-card>
+

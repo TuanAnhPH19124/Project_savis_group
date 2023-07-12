@@ -1,0 +1,55 @@
+version: '3.0'
+
+networks:
+  dev:
+    driver: bridge
+
+services:
+  dotnet-webapi:
+    image: dotnet-webapi
+    depends_on:
+      - "app_db"
+      - "redis_db"
+    container_name: webapi-runtime
+    ports:
+      - "8080:80"
+    build: 
+      context: ./Backend/Bachkend-Webapi/GlobalApi
+      dockerfile: Dockerfile.backend
+    environment:
+      - ConnectionStrings__PostgreSql=User ID=postgres;Password=00001;Server=app_db;Port=5434;Database=Savis;Pooling=true
+      - ConnectionStrings__RedisConnection=redis_db:6379
+      - ASPNETCORE_URLS=http://+:80
+    networks:
+      - dev
+
+  app_db:
+    image: postgres
+    container_name: app_db
+    environment:
+      - POSTGRES_USER=postgres 
+      - POSTGRES_PASSWORD=00001
+      - POSTGRES_DB=Savis
+    ports:
+      - "5434:5432"
+    restart: always
+    volumes:
+      - app_data:/var/lib/postgres/data
+    networks:
+      - dev
+  
+  redis_db:
+    image: redis
+    container_name: redis_db
+    ports:
+      - "6379:6379"
+    restart: always
+    volumes:
+      - redis_data:/var/lib/redis/data
+    networks:
+      - dev
+
+volumes:
+  app_data:
+  redis_data:
+

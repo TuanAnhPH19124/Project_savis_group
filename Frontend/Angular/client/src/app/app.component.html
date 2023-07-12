@@ -1,0 +1,28 @@
+<main>
+  <header class="brand-name">
+    <a [routerLink]="['/']">
+      <img class="brand-logo" src="/assets/logo.svg" alt="" aria-hidden="true">
+    </a>
+    <div style="display: flex; align-items: center;" >
+      <a [routerLink]="['/booking']" style="text-decoration: none;">
+        <mat-icon *ngIf="_authService.loggedIn()" 
+        class="mx-4" 
+        matBadgeOverlap="false" 
+        [matBadge]="bookingService.getCounterBooking()" >add_shopping_cart</mat-icon>
+      </a> 
+      <a *ngIf="_authService.userRoles() === 'Admin'" style="padding-right: 5px;" class="insert" [routerLink]="['/insert']">+</a>
+      <div *ngIf="!_authService.loggedIn()">
+        <a [routerLink]="['/login']">Login</a>
+        <!-- <a [routerLink]="['/login']">Register</a> -->
+      </div>
+      <button *ngIf="_authService.loggedIn()" (click)="_authService.logOut()">Logout</button>
+    </div>
+  </header>
+  <div class="loader-container" *ngIf="progressService.isLoading | async">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+
+  </div>
+  <section class="content">
+    <router-outlet></router-outlet>
+  </section>
+</main>

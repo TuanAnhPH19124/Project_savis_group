@@ -1,0 +1,29 @@
+<div *ngIf="housinglocaion" class="property-details">
+  <div class="property-info">
+  <label>ID:</label>
+  <input type="number" [(ngModel)]="housinglocationid" readonly>
+  <label>Name:</label>
+  <input type="text" [(ngModel)]="housinglocaion.name">
+  <label>City:</label>
+  <input type="text" [(ngModel)]="housinglocaion.city">
+  <label>State:</label>
+  <input type="text" [(ngModel)]="housinglocaion.district">
+  <label>Available Units:</label>
+  <input type="number" [(ngModel)]="housinglocaion.availableUnits">
+  <label>Wifi:</label>
+  <input type="checkbox" [(ngModel)]="housinglocaion.wifi">
+  <label>Laundry:</label>
+  <input type="checkbox" [(ngModel)]="housinglocaion.laundry">
+  <div style="display: flex; justify-content: space-between;">
+    <button style="transition: background-color 0.3s ease" (click)="handleClick()" type="submit" class="primary button">Apply now</button>
+    <button style="transition: background-color 0.3s ease " (click)="handleRemoveClick(housinglocationid)" type="submit" class="primary button">Remove</button>
+  </div>
+</div>
+<form [formGroup] = "uploadForm" (ngSubmit)="handleClick()">      
+  <div class="property-image">
+    <img [src]="imgsrc" alt="Property Photo">
+    <input type="file" name="images" (change)="onFileChange($event)" />
+    <button type="submit">Upload</button>
+  </div>
+</form>
+</div>

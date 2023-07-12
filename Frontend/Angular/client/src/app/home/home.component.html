@@ -1,0 +1,63 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3 border-end">
+      <form>
+        <input class="" style="width: 70%;" type="text" placeholder="Search by name" #filter>
+        <button class="primary" type="button" (click)="handelSearch(filter.value)">Search</button>
+      </form>
+      <div class="row pt-2">
+        <mat-slide-toggle [(ngModel)]="wifiCheck" class="col-6" color="primary">Wifi</mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="laundrycheck" class="col-6" color="primary">Launry</mat-slide-toggle>
+      </div>
+      <div class="row pt-2">
+        <mat-form-field>
+          <mat-label>Select a City</mat-label>
+          <mat-select [(value)]="selectedCity" (click)="getProvince()">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let city of cityList" [value]="city.code+'/'+city.name">{{city.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>District</mat-label>
+          <mat-select [(value)]="selectedDistrict" (click)="getDictrict()">
+            <mat-option *ngFor="let topping of districtList"
+              [value]="topping.code+'/'+topping.name">{{topping.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Ward</mat-label>
+          <mat-select [(value)]="selectedWard" (click)="getWard()">
+            <mat-option *ngFor="let topping of wardList"
+              [value]="topping.code+'/'+topping.name">{{topping.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="row pt-2">
+        <!-- <mat-slider style="width: 300px;" min="0" max="1000000" step="2000" showTickMarks discrete [displayWith]="formatLabel">
+          <input matSliderThumb>
+        </mat-slider> -->
+        <div class="example-label-container">
+          <label id="example-name-label" class="example-name-label">{{min}}K</label>
+          <label class="example-value-label">{{max}}K</label>
+        </div>
+        <mat-slider style="width: 300px;" min="0" max="500" step="100">
+          <input matSliderStartThumb [(ngModel)]="min">
+          <input matSliderEndThumb [(ngModel)]="max">
+        </mat-slider>
+      </div>
+      <div style="display: flex; justify-content: space-between;">
+        <button style="border: none;" mat-raised-button color="primary" (click)="handleClickFilter()">Filter</button>
+        <button style="border: none;" mat-raised-button color="warn" [disabled]="disableFilter" (click)="ClearFilter()">Clear filter</button>
+      </div>
+    </div>
+    <div class="col-9 ">
+      <div class="row">
+        <app-housing-location class="col-md-4 py-2" *ngFor="let housingLocation of pageContent"
+          [housingLocation]="housingLocation"></app-housing-location>
+        <mat-paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions" aria-label="Select page">
+        </mat-paginator>
+      </div>
+    </div>
+    
+  </div>
+</div>

@@ -1,0 +1,13 @@
+.listing-location::before {
+  content: url("/assets/location-pin.svg") / "";
+}
+
+.inputAmount{
+  border: none;
+  text-align: center;
+  width: 40px;
+}
+
+.inputAmount:focus{
+  outline: none;
+}

@@ -1,0 +1,49 @@
+<div class="container">
+  <h1>Booking</h1>
+  <mat-card>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-lg-8 border-end">
+          <app-booking-detail *ngFor="let bookingDetail of bookingService.getBookingDetailList()" [bookingDetail]="bookingDetail"></app-booking-detail>
+        </div>
+        <div class="col-lg-4">
+          <mat-card style="margin-bottom: 10px;">
+            <mat-form-field>
+              <mat-label>Choose a check in date</mat-label>
+              <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" (dateInput)="addEvent('input', $event)">           
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </mat-card>
+          <mat-card>
+            <div style="padding: 0; margin: 0; display: flex; justify-content: space-between;">
+              <mat-card-title>Subtotal(1 items): </mat-card-title>
+              <mat-card-title>đ{{bookingService.calculateSubTotal()}}</mat-card-title>
+            </div>
+            <div style="padding: 0; margin: 0; display: flex; justify-content: space-between;">
+              <mat-card-subtitle class="listing-location">This transaction have a discount: </mat-card-subtitle>
+              <mat-card-subtitle class="listing-location">đ{{discount}}</mat-card-subtitle>
+            </div>
+            <mat-card-title style="margin-top: 5px;">Pay method: </mat-card-title>
+            <mat-form-field>
+              <mat-label>Choose a pay method</mat-label>
+              <mat-select [(value)]="selectedPayMethod">
+                <mat-option *ngFor="let payMethod of payMethods" [value]="payMethod.viewValue">
+                  {{payMethod.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div style="padding: 0; margin: 0; display: flex; justify-content: space-between;">
+              <mat-card-title style="color: #f44336; font-size: 24px;">Total: </mat-card-title>
+              <mat-card-title>đ{{bookingService.calculateSubTotal() + discount}}</mat-card-title>
+            </div>
+            <button mat-flat-button (click)="CheckOut()" color="primary">Proceed to checkout</button>
+          </mat-card>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  
+</div>

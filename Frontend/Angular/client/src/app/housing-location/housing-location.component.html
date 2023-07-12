@@ -1,0 +1,13 @@
+<div class="" *ngIf="housingLocation">
+  <section class="listing">
+    <img class="listing-photo" src="https://loremflickr.com/640/480/business" alt="Exterior photo of {{housingLocation.name}}">
+    <h2 class="listing-heading">{{ housingLocation.name }}</h2>
+    <p class="mb-0 listing-location">{{ housingLocation.city}}, {{housingLocation.district}}, {{housingLocation.ward}}</p>
+    <p class="prices">{{housingLocation.price}}đ</p>
+    <div class="interaction">
+      <a [routerLink]="['/details', housingLocation.id]">Learn More</a>
+      <a *ngIf="authenticationService.userRoles() === 'Admin'" style="padding-right:15px" [routerLink]="['/edit', housingLocation.id]">Edit</a>
+    </div>
+  </section>
+</div>
+
